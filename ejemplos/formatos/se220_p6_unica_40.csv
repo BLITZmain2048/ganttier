@@ -1,0 +1,41 @@
+﻿Activity ID;Activity Name;Original Duration;Remaining Duration;Start;Finish;Predecessors;Resource Names;Physical % Complete;Activity Type;WBS;Calendar;Budgeted Total Cost;Budgeted Labor Units;Actual Start;Actual Finish;Actual Work;Primary Constraint;Primary Constraint Date
+A00001;S/E Los Maitenes 220 kV · Ingeniería y permisos · Frente 001;1;0;2027-01-04;2027-01-04;;"Técnico 1[50%];Especialista 1[50%]";100;Task Dependent;SE.P1;Jornada SE;160000;8;2027-01-04;2027-01-04;8;SNET;2027-01-04
+A00002;S/E Los Maitenes 220 kV · Ingeniería y permisos · Frente 002;1;1;2027-01-05;2027-01-05;A00001 FS;"Técnico 1[50%];Especialista 1[50%]";0;Task Dependent;SE.P1;Jornada SE;160000;8;;;0;ASAP;
+A00003;S/E Los Maitenes 220 kV · Ingeniería y permisos · Frente 003;1;1;2027-01-06;2027-01-06;A00002 FS;"Técnico 1[50%];Especialista 1[50%]";0;Task Dependent;SE.P1;Jornada SE;160000;8;;;0;ASAP;
+A00004;S/E Los Maitenes 220 kV · Ingeniería y permisos · Frente 004;1;1;2027-01-07;2027-01-07;A00003 FS;"Técnico 1[50%];Especialista 1[50%]";0;Task Dependent;SE.P1;Jornada SE;160000;8;;;0;ASAP;
+A00005;S/E Los Maitenes 220 kV · Ingeniería y permisos · Frente 005;1;1;2027-01-08;2027-01-08;A00004 FS;"Técnico 1[50%];Especialista 1[50%]";0;Task Dependent;SE.P1;Jornada SE;160000;8;;;0;ASAP;
+A00006;S/E Los Maitenes 220 kV · Ingeniería y permisos · Frente 006;1;1;2027-01-11;2027-01-11;A00005 FS;"Técnico 1[50%];Especialista 1[50%]";0;Task Dependent;SE.P1;Jornada SE;160000;8;;;0;ASAP;
+A00007;S/E Los Maitenes 220 kV · Ingeniería y permisos · Frente 007;1;1;2027-01-12;2027-01-12;A00006 FS;"Técnico 1[50%];Especialista 1[50%]";0;Task Dependent;SE.P1;Jornada SE;160000;8;;;0;ASAP;
+A00008;S/E Los Maitenes 220 kV · Ingeniería y permisos · Frente 008;1;1;2027-01-13;2027-01-13;A00007 FS;"Técnico 1[50%];Especialista 1[50%]";0;Task Dependent;SE.P1;Jornada SE;160000;8;;;0;ASAP;
+A00009;S/E Los Maitenes 220 kV · Ingeniería y permisos · Frente 009;1;1;2027-01-14;2027-01-14;A00008 FS;"Técnico 1[50%];Especialista 1[50%]";0;Task Dependent;SE.P1;Jornada SE;160000;8;;;0;ASAP;
+A00010;S/E Los Maitenes 220 kV · Ingeniería y permisos · Hito de recepción;0;0;2027-01-15;2027-01-15;A00009 FS;;0;Finish Milestone;SE.P1;Jornada SE;0;0;;;0;ASAP;
+A00011;S/E Los Maitenes 220 kV · Obras civiles · Frente 001;1;0;2027-01-04;2027-01-04;;"Técnico 2[50%];Especialista 2[50%]";100;Task Dependent;SE.P2;Jornada SE;160000;8;2027-01-04;2027-01-04;8;SNET;2027-01-04
+A00012;S/E Los Maitenes 220 kV · Obras civiles · Frente 002;1;1;2027-01-05;2027-01-05;A00011 FS;"Técnico 2[50%];Especialista 2[50%]";0;Task Dependent;SE.P2;Jornada SE;160000;8;;;0;ASAP;
+A00013;S/E Los Maitenes 220 kV · Obras civiles · Frente 003;1;1;2027-01-06;2027-01-06;A00012 FS;"Técnico 2[50%];Especialista 2[50%]";0;Task Dependent;SE.P2;Jornada SE;160000;8;;;0;ASAP;
+A00014;S/E Los Maitenes 220 kV · Obras civiles · Frente 004;1;1;2027-01-07;2027-01-07;A00013 FS;"Técnico 2[50%];Especialista 2[50%]";0;Task Dependent;SE.P2;Jornada SE;160000;8;;;0;ASAP;
+A00015;S/E Los Maitenes 220 kV · Obras civiles · Frente 005;1;1;2027-01-08;2027-01-08;A00014 FS;"Técnico 2[50%];Especialista 2[50%]";0;Task Dependent;SE.P2;Jornada SE;160000;8;;;0;ASAP;
+A00016;S/E Los Maitenes 220 kV · Obras civiles · Frente 006;1;1;2027-01-11;2027-01-11;A00015 FS;"Técnico 2[50%];Especialista 2[50%]";0;Task Dependent;SE.P2;Jornada SE;160000;8;;;0;ASAP;
+A00017;S/E Los Maitenes 220 kV · Obras civiles · Frente 007;1;1;2027-01-12;2027-01-12;A00016 FS;"Técnico 2[50%];Especialista 2[50%]";0;Task Dependent;SE.P2;Jornada SE;160000;8;;;0;ASAP;
+A00018;S/E Los Maitenes 220 kV · Obras civiles · Frente 008;1;1;2027-01-13;2027-01-13;A00017 FS;"Técnico 2[50%];Especialista 2[50%]";0;Task Dependent;SE.P2;Jornada SE;160000;8;;;0;ASAP;
+A00019;S/E Los Maitenes 220 kV · Obras civiles · Frente 009;1;1;2027-01-14;2027-01-14;A00018 FS;"Técnico 2[50%];Especialista 2[50%]";0;Task Dependent;SE.P2;Jornada SE;160000;8;;;0;ASAP;
+A00020;S/E Los Maitenes 220 kV · Obras civiles · Hito de recepción;0;0;2027-01-15;2027-01-15;A00019 FS;;0;Finish Milestone;SE.P2;Jornada SE;0;0;;;0;ASAP;
+A00021;S/E Los Maitenes 220 kV · Montaje electromecánico · Frente 001;1;0;2027-01-04;2027-01-04;;"Técnico 3[50%];Especialista 3[50%]";100;Task Dependent;SE.P3;Jornada SE;160000;8;2027-01-04;2027-01-04;8;SNET;2027-01-04
+A00022;S/E Los Maitenes 220 kV · Montaje electromecánico · Frente 002;1;1;2027-01-05;2027-01-05;A00021 FS;"Técnico 3[50%];Especialista 3[50%]";0;Task Dependent;SE.P3;Jornada SE;160000;8;;;0;ASAP;
+A00023;S/E Los Maitenes 220 kV · Montaje electromecánico · Frente 003;1;1;2027-01-06;2027-01-06;A00022 FS;"Técnico 3[50%];Especialista 3[50%]";0;Task Dependent;SE.P3;Jornada SE;160000;8;;;0;ASAP;
+A00024;S/E Los Maitenes 220 kV · Montaje electromecánico · Frente 004;1;1;2027-01-07;2027-01-07;A00023 FS;"Técnico 3[50%];Especialista 3[50%]";0;Task Dependent;SE.P3;Jornada SE;160000;8;;;0;ASAP;
+A00025;S/E Los Maitenes 220 kV · Montaje electromecánico · Frente 005;1;1;2027-01-08;2027-01-08;A00024 FS;"Técnico 3[50%];Especialista 3[50%]";0;Task Dependent;SE.P3;Jornada SE;160000;8;;;0;ASAP;
+A00026;S/E Los Maitenes 220 kV · Montaje electromecánico · Frente 006;1;1;2027-01-11;2027-01-11;A00025 FS;"Técnico 3[50%];Especialista 3[50%]";0;Task Dependent;SE.P3;Jornada SE;160000;8;;;0;ASAP;
+A00027;S/E Los Maitenes 220 kV · Montaje electromecánico · Frente 007;1;1;2027-01-12;2027-01-12;A00026 FS;"Técnico 3[50%];Especialista 3[50%]";0;Task Dependent;SE.P3;Jornada SE;160000;8;;;0;ASAP;
+A00028;S/E Los Maitenes 220 kV · Montaje electromecánico · Frente 008;1;1;2027-01-13;2027-01-13;A00027 FS;"Técnico 3[50%];Especialista 3[50%]";0;Task Dependent;SE.P3;Jornada SE;160000;8;;;0;ASAP;
+A00029;S/E Los Maitenes 220 kV · Montaje electromecánico · Frente 009;1;1;2027-01-14;2027-01-14;A00028 FS;"Técnico 3[50%];Especialista 3[50%]";0;Task Dependent;SE.P3;Jornada SE;160000;8;;;0;ASAP;
+A00030;S/E Los Maitenes 220 kV · Montaje electromecánico · Hito de recepción;0;0;2027-01-15;2027-01-15;A00029 FS;;0;Finish Milestone;SE.P3;Jornada SE;0;0;;;0;ASAP;
+A00031;S/E Los Maitenes 220 kV · Protecciones y puesta en servicio · Frente 001;1;0;2027-01-04;2027-01-04;;"Técnico 4[50%];Especialista 4[50%]";100;Task Dependent;SE.P4;Jornada SE;160000;8;2027-01-04;2027-01-04;8;SNET;2027-01-04
+A00032;S/E Los Maitenes 220 kV · Protecciones y puesta en servicio · Frente 002;1;1;2027-01-05;2027-01-05;A00031 FS;"Técnico 4[50%];Especialista 4[50%]";0;Task Dependent;SE.P4;Jornada SE;160000;8;;;0;ASAP;
+A00033;S/E Los Maitenes 220 kV · Protecciones y puesta en servicio · Frente 003;1;1;2027-01-06;2027-01-06;A00032 FS;"Técnico 4[50%];Especialista 4[50%]";0;Task Dependent;SE.P4;Jornada SE;160000;8;;;0;ASAP;
+A00034;S/E Los Maitenes 220 kV · Protecciones y puesta en servicio · Frente 004;1;1;2027-01-07;2027-01-07;A00033 FS;"Técnico 4[50%];Especialista 4[50%]";0;Task Dependent;SE.P4;Jornada SE;160000;8;;;0;ASAP;
+A00035;S/E Los Maitenes 220 kV · Protecciones y puesta en servicio · Frente 005;1;1;2027-01-08;2027-01-08;A00034 FS;"Técnico 4[50%];Especialista 4[50%]";0;Task Dependent;SE.P4;Jornada SE;160000;8;;;0;ASAP;
+A00036;S/E Los Maitenes 220 kV · Protecciones y puesta en servicio · Frente 006;1;1;2027-01-11;2027-01-11;A00035 FS;"Técnico 4[50%];Especialista 4[50%]";0;Task Dependent;SE.P4;Jornada SE;160000;8;;;0;ASAP;
+A00037;S/E Los Maitenes 220 kV · Protecciones y puesta en servicio · Frente 007;1;1;2027-01-12;2027-01-12;A00036 FS;"Técnico 4[50%];Especialista 4[50%]";0;Task Dependent;SE.P4;Jornada SE;160000;8;;;0;ASAP;
+A00038;S/E Los Maitenes 220 kV · Protecciones y puesta en servicio · Frente 008;1;1;2027-01-13;2027-01-13;A00037 FS;"Técnico 4[50%];Especialista 4[50%]";0;Task Dependent;SE.P4;Jornada SE;160000;8;;;0;ASAP;
+A00039;S/E Los Maitenes 220 kV · Protecciones y puesta en servicio · Frente 009;1;1;2027-01-14;2027-01-14;A00038 FS;"Técnico 4[50%];Especialista 4[50%]";0;Task Dependent;SE.P4;Jornada SE;160000;8;;;0;ASAP;
+A00040;S/E Los Maitenes 220 kV · Protecciones y puesta en servicio · Hito de recepción;0;0;2027-01-15;2027-01-15;A00039 FS;;0;Finish Milestone;SE.P4;Jornada SE;0;0;;;0;ASAP;

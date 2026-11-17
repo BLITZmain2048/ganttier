@@ -1,0 +1,4 @@
+# Optimizador exacto CP-SAT. Si no hay binarios para su versión de Python, Ganttier usa la heurística.
+ortools>=9.10,<10
+# Lector PDF independiente. Si falta, el ejecutable usa PySide6.QtPdf en un subproceso.
+pypdf>=5,<7

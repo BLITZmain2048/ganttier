@@ -1,0 +1,32 @@
+# Entornos y dependencias
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+*.pyd
+.pytest_cache/
+
+# Compilados
+build/
+dist/
+frontend/dist/
+
+# Datos de ejecución
+datos/
+*.db
+*.db-shm
+*.db-wal
+*.log
+
+# Temporales de pruebas y herramientas
+.*-test-tmp/
+.ux*-test-tmp/
+.ganttier-cli-temporales/
+**/tests/**/.deps/
+**/tests/**/.tmp/
+**/tests/**/_runtime/
+backend/programa_resultados/
+
+# Historial local de encargos
+trabajos/
+_encargos/

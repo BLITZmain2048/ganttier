@@ -1,0 +1,989 @@
+{
+  "schema_version": "1.0",
+  "name": "Instalación y validación de dos estaciones de prueba",
+  "synthetic_data": true,
+  "description": "Datos ficticios de entrada para un optimizador; no contiene una programación ni asignaciones de personal.",
+  "time_model": {
+    "horizon_slots": 60,
+    "slot_hours": 4,
+    "slots_per_workday": 2,
+    "workdays": 30,
+    "time_boundaries": "Enteros de 0 a 60; el bloque b representa [b,b+1).",
+    "activity_interval": "[start,start+duration_slots)",
+    "unavailability_interval": "[start,end), extremo final excluido",
+    "nonworking_time": "No representado: noches y días no laborables quedan fuera del eje de bloques."
+  },
+  "roles": {
+    "C": "Coordinación",
+    "E": "Electricidad",
+    "M": "Mecánica",
+    "I": "Automatización",
+    "Q": "Ensayos y verificación",
+    "X": "Apoyo"
+  },
+  "personnel": [
+    {
+      "id": "T01",
+      "name": "Ana",
+      "skills": [
+        "C",
+        "I"
+      ],
+      "cost_per_slot": 140,
+      "availability_window": [
+        0,
+        60
+      ],
+      "unavailable_intervals": []
+    },
+    {
+      "id": "T02",
+      "name": "Bruno",
+      "skills": [
+        "E",
+        "Q"
+      ],
+      "cost_per_slot": 100,
+      "availability_window": [
+        0,
+        60
+      ],
+      "unavailable_intervals": [
+        [
+          14,
+          18
+        ]
+      ]
+    },
+    {
+      "id": "T03",
+      "name": "Carla",
+      "skills": [
+        "E",
+        "M"
+      ],
+      "cost_per_slot": 90,
+      "availability_window": [
+        0,
+        60
+      ],
+      "unavailable_intervals": []
+    },
+    {
+      "id": "T04",
+      "name": "Daniel",
+      "skills": [
+        "M"
+      ],
+      "cost_per_slot": 75,
+      "availability_window": [
+        0,
+        60
+      ],
+      "unavailable_intervals": [
+        [
+          40,
+          44
+        ]
+      ]
+    },
+    {
+      "id": "T05",
+      "name": "Elena",
+      "skills": [
+        "I",
+        "Q"
+      ],
+      "cost_per_slot": 110,
+      "availability_window": [
+        0,
+        60
+      ],
+      "unavailable_intervals": [
+        [
+          24,
+          28
+        ]
+      ]
+    },
+    {
+      "id": "T06",
+      "name": "Felipe",
+      "skills": [
+        "Q"
+      ],
+      "cost_per_slot": 80,
+      "availability_window": [
+        0,
+        60
+      ],
+      "unavailable_intervals": []
+    },
+    {
+      "id": "T07",
+      "name": "Gabriela",
+      "skills": [
+        "X"
+      ],
+      "cost_per_slot": 45,
+      "availability_window": [
+        0,
+        60
+      ],
+      "unavailable_intervals": []
+    },
+    {
+      "id": "T08",
+      "name": "Hugo",
+      "skills": [
+        "X",
+        "M"
+      ],
+      "cost_per_slot": 60,
+      "availability_window": [
+        0,
+        60
+      ],
+      "unavailable_intervals": []
+    }
+  ],
+  "resources": [
+    {
+      "id": "HM",
+      "name": "Juego de herramientas mecánicas",
+      "capacity": 2,
+      "renewable": true,
+      "availability_window": [
+        0,
+        60
+      ]
+    },
+    {
+      "id": "HE",
+      "name": "Juego de herramientas eléctricas",
+      "capacity": 2,
+      "renewable": true,
+      "availability_window": [
+        0,
+        60
+      ]
+    },
+    {
+      "id": "EL",
+      "name": "Elevador móvil",
+      "capacity": 1,
+      "renewable": true,
+      "availability_window": [
+        0,
+        60
+      ]
+    },
+    {
+      "id": "PC",
+      "name": "Estación informática con software de ingeniería",
+      "capacity": 1,
+      "renewable": true,
+      "availability_window": [
+        0,
+        60
+      ]
+    },
+    {
+      "id": "ME",
+      "name": "Equipo de medición",
+      "capacity": 1,
+      "renewable": true,
+      "availability_window": [
+        0,
+        60
+      ]
+    },
+    {
+      "id": "BC",
+      "name": "Banco de ensayo",
+      "capacity": 1,
+      "renewable": true,
+      "availability_window": [
+        0,
+        60
+      ]
+    },
+    {
+      "id": "SP",
+      "name": "Sala de pruebas",
+      "capacity": 1,
+      "renewable": true,
+      "availability_window": [
+        0,
+        60
+      ]
+    }
+  ],
+  "rules": {
+    "all_activities_mandatory": true,
+    "preemption_allowed": false,
+    "activity_duration_independent_of_staff_choice": true,
+    "exact_personnel_counts_required": true,
+    "same_personnel_throughout_activity": true,
+    "one_role_per_person_per_activity": true,
+    "max_simultaneous_activities_per_person": 1,
+    "roles_are_exhaustive": true,
+    "resources_held_for_full_activity_duration": true,
+    "unavailability_must_not_overlap_activity": true,
+    "overtime_allowed": false,
+    "all_dependencies": "finish-to-start: successor.start >= predecessor.finish + lag_slots",
+    "recurrence_semantics": "Exactamente una ocurrencia por ventana; no se exige una separación exacta entre inicios ni un máximo entre ocurrencias.",
+    "periodic_window_formula": "Para ocurrencia k (1..6): start >= 10*(k-1) y finish <= 10*k.",
+    "periodic_activity_count_fixed": true,
+    "periodic_activities_continue_after_project_close": true,
+    "periodic_activities_must_not_be_added_as_close_predecessors_except_as_explicitly_listed": true,
+    "cost_units": "Unidades monetarias ficticias por bloque trabajado; no se cobran horas ociosas ni recursos materiales."
+  },
+  "objectives": {
+    "aggregation": "lexicographic",
+    "priorities": [
+      {
+        "priority": 1,
+        "sense": "minimize",
+        "metric": "start_time",
+        "activity_id": "A27"
+      },
+      {
+        "priority": 2,
+        "sense": "minimize",
+        "metric": "total_personnel_cost",
+        "formula": "sum(a.duration_slots * sum(p.cost_per_slot for p assigned to a) for a in all_expanded_activities)"
+      }
+    ],
+    "note": "El objetivo primario NO es el final de la última rutina periódica; es el instante de cierre A27."
+  },
+  "activities": [
+    {
+      "id": "A01",
+      "name": "Revisar requisitos y alcance",
+      "duration_slots": 1,
+      "predecessors": [],
+      "personnel_requirements": {
+        "C": 1,
+        "I": 1
+      },
+      "resource_requirements": {},
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A02",
+      "name": "Diseñar montaje mecánico",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A01",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "M": 1
+      },
+      "resource_requirements": {
+        "PC": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A03",
+      "name": "Diseñar instalación eléctrica",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A01",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "E": 1,
+        "I": 1
+      },
+      "resource_requirements": {
+        "PC": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A04",
+      "name": "Definir protocolo de pruebas",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A01",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "Q": 1
+      },
+      "resource_requirements": {
+        "PC": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A05",
+      "name": "Recibir y clasificar materiales",
+      "duration_slots": 1,
+      "predecessors": [
+        {
+          "activity_id": "A02",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "A03",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "M": 1,
+        "X": 1
+      },
+      "resource_requirements": {
+        "HM": 1
+      },
+      "earliest_start_slot": 6,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A06",
+      "name": "Preparar área de estación A",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A05",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "P01_01",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "M": 1,
+        "X": 1
+      },
+      "resource_requirements": {
+        "HM": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A07",
+      "name": "Preparar área de estación B",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A05",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "P01_01",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "M": 1,
+        "X": 1
+      },
+      "resource_requirements": {
+        "HM": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A08",
+      "name": "Montar estructura de estación A",
+      "duration_slots": 3,
+      "predecessors": [
+        {
+          "activity_id": "A06",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "M": 1,
+        "X": 1
+      },
+      "resource_requirements": {
+        "HM": 1,
+        "EL": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A09",
+      "name": "Montar estructura de estación B",
+      "duration_slots": 3,
+      "predecessors": [
+        {
+          "activity_id": "A07",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "M": 1,
+        "X": 1
+      },
+      "resource_requirements": {
+        "HM": 1,
+        "EL": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A10",
+      "name": "Cablear estación A",
+      "duration_slots": 3,
+      "predecessors": [
+        {
+          "activity_id": "A08",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "E": 1,
+        "X": 1
+      },
+      "resource_requirements": {
+        "HE": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A11",
+      "name": "Cablear estación B",
+      "duration_slots": 3,
+      "predecessors": [
+        {
+          "activity_id": "A09",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "E": 1,
+        "X": 1
+      },
+      "resource_requirements": {
+        "HE": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A12",
+      "name": "Desarrollar control de estación A",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A03",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "I": 1
+      },
+      "resource_requirements": {
+        "PC": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A13",
+      "name": "Desarrollar control de estación B",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A03",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "I": 1
+      },
+      "resource_requirements": {
+        "PC": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A14",
+      "name": "Instalar sensores de estación A",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A10",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "E": 1,
+        "M": 1
+      },
+      "resource_requirements": {
+        "HE": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A15",
+      "name": "Instalar sensores de estación B",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A11",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "E": 1,
+        "M": 1
+      },
+      "resource_requirements": {
+        "HE": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A16",
+      "name": "Verificar conexiones de estación A",
+      "duration_slots": 1,
+      "predecessors": [
+        {
+          "activity_id": "A14",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "E": 1,
+        "Q": 1
+      },
+      "resource_requirements": {
+        "ME": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A17",
+      "name": "Verificar conexiones de estación B",
+      "duration_slots": 1,
+      "predecessors": [
+        {
+          "activity_id": "A15",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "E": 1,
+        "Q": 1
+      },
+      "resource_requirements": {
+        "ME": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A18",
+      "name": "Cargar control de estación A",
+      "duration_slots": 1,
+      "predecessors": [
+        {
+          "activity_id": "A12",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "A16",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "I": 1
+      },
+      "resource_requirements": {
+        "PC": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A19",
+      "name": "Cargar control de estación B",
+      "duration_slots": 1,
+      "predecessors": [
+        {
+          "activity_id": "A13",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "A17",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "I": 1
+      },
+      "resource_requirements": {
+        "PC": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A20",
+      "name": "Calibrar sensores de estación A",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A18",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "I": 1,
+        "Q": 1
+      },
+      "resource_requirements": {
+        "PC": 1,
+        "ME": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A21",
+      "name": "Calibrar sensores de estación B",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A19",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "I": 1,
+        "Q": 1
+      },
+      "resource_requirements": {
+        "PC": 1,
+        "ME": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A22",
+      "name": "Realizar ensayo individual de estación A",
+      "duration_slots": 3,
+      "predecessors": [
+        {
+          "activity_id": "A20",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "A04",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "P03_01",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "Q": 1,
+        "E": 1
+      },
+      "resource_requirements": {
+        "BC": 1,
+        "SP": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A23",
+      "name": "Realizar ensayo individual de estación B",
+      "duration_slots": 3,
+      "predecessors": [
+        {
+          "activity_id": "A21",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "A04",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "P03_01",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "Q": 1,
+        "E": 1
+      },
+      "resource_requirements": {
+        "BC": 1,
+        "SP": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A24",
+      "name": "Realizar validación conjunta",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A22",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "A23",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "I": 1,
+        "Q": 1
+      },
+      "resource_requirements": {
+        "BC": 1,
+        "ME": 1,
+        "SP": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A25",
+      "name": "Realizar capacitación y demostración",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A24",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "C": 1,
+        "I": 1
+      },
+      "resource_requirements": {
+        "PC": 1,
+        "SP": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A26",
+      "name": "Preparar informe de aceptación",
+      "duration_slots": 2,
+      "predecessors": [
+        {
+          "activity_id": "A24",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {
+        "Q": 1
+      },
+      "resource_requirements": {
+        "PC": 1
+      },
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": false
+    },
+    {
+      "id": "A27",
+      "name": "Cierre del proyecto",
+      "duration_slots": 0,
+      "predecessors": [
+        {
+          "activity_id": "A25",
+          "type": "FS",
+          "lag_slots": 0
+        },
+        {
+          "activity_id": "A26",
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ],
+      "personnel_requirements": {},
+      "resource_requirements": {},
+      "earliest_start_slot": 0,
+      "latest_finish_slot": 60,
+      "is_milestone": true
+    }
+  ],
+  "periodic_series": [
+    {
+      "id": "P01",
+      "name": "Inspección periódica de seguridad",
+      "duration_slots": 1,
+      "personnel_requirements": {
+        "C": 1,
+        "M": 1
+      },
+      "resource_requirements": {},
+      "first_window_start_slot": 0,
+      "period_slots": 10,
+      "window_length_slots": 10,
+      "occurrence_count": 6,
+      "occurrence_index_starts_at": 1,
+      "occurrence_id_format": "{series_id}_{occurrence:02d}",
+      "predecessors": []
+    },
+    {
+      "id": "P02",
+      "name": "Mantenimiento periódico del banco",
+      "duration_slots": 1,
+      "personnel_requirements": {
+        "M": 1,
+        "E": 1
+      },
+      "resource_requirements": {
+        "HM": 1,
+        "BC": 1
+      },
+      "first_window_start_slot": 0,
+      "period_slots": 10,
+      "window_length_slots": 10,
+      "occurrence_count": 6,
+      "occurrence_index_starts_at": 1,
+      "occurrence_id_format": "{series_id}_{occurrence:02d}",
+      "predecessors": []
+    },
+    {
+      "id": "P03",
+      "name": "Comprobación periódica del banco",
+      "duration_slots": 1,
+      "personnel_requirements": {
+        "Q": 1
+      },
+      "resource_requirements": {
+        "ME": 1,
+        "BC": 1
+      },
+      "first_window_start_slot": 0,
+      "period_slots": 10,
+      "window_length_slots": 10,
+      "occurrence_count": 6,
+      "occurrence_index_starts_at": 1,
+      "occurrence_id_format": "{series_id}_{occurrence:02d}",
+      "predecessors": [
+        {
+          "series_id": "P02",
+          "occurrence_offset": 0,
+          "type": "FS",
+          "lag_slots": 0
+        }
+      ]
+    },
+    {
+      "id": "P04",
+      "name": "Inventario periódico de herramientas",
+      "duration_slots": 1,
+      "personnel_requirements": {
+        "X": 1
+      },
+      "resource_requirements": {
+        "HM": 1
+      },
+      "first_window_start_slot": 0,
+      "period_slots": 10,
+      "window_length_slots": 10,
+      "occurrence_count": 6,
+      "occurrence_index_starts_at": 1,
+      "occurrence_id_format": "{series_id}_{occurrence:02d}",
+      "predecessors": []
+    }
+  ],
+  "expected_expanded_counts": {
+    "one_off_work_activities": 26,
+    "milestones": 1,
+    "periodic_occurrences": 24,
+    "total_activities_including_milestones": 51
+  }
+}
